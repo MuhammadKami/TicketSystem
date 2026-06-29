@@ -29,7 +29,7 @@ export default function LoginPage() {
         <span className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">TriageAI</span>
       </Link>
 
-      <GlassCard glow className="w-full max-w-[420px] animate-scale-in p-8">
+      <GlassCard glow className="w-full max-w-[420px] animate-scale-in p-6">
         <h1 className="text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">Welcome back</h1>
         <p className="mb-6 mt-1.5 text-sm text-gray-600 dark:text-gray-400">Sign in to your support command center.</p>
 

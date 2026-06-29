@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }) {
   return (
     <ToastProvider>
       <TicketsProvider>
-        <div className="flex min-h-screen">
+        <div className="dashboard-shell flex min-h-screen">
           <Sidebar />
           <main className="min-w-0 flex-1 p-8 max-md:p-4 max-md:pb-24">{children}</main>
         </div>

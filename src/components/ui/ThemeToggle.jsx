@@ -21,6 +21,8 @@ export default function ThemeToggle({ className = '' }) {
     } catch {}
   };
 
+  if (!mounted) return <div className={`h-9 w-9 ${className}`} />;
+
   return (
     <button
       type="button"
@@ -28,7 +30,7 @@ export default function ThemeToggle({ className = '' }) {
       aria-label="Toggle theme"
       className={`inline-flex h-9 w-9 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-600 transition-all duration-150 hover:bg-gray-100 active:scale-95 dark:border-gray-800 dark:bg-gray-900 dark:text-gray-400 dark:hover:bg-gray-800 ${className}`}
     >
-      {mounted && dark ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
+      {dark ? <Moon size={18} strokeWidth={1.5} /> : <Sun size={18} strokeWidth={1.5} />}
     </button>
   );
 }

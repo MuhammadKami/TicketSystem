@@ -63,7 +63,7 @@ export default function SettingsPage() {
 
   return (
     <>
-      <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <span className="text-xs font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">Automation engine</span>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">AI Escalation Rules</h1>
@@ -76,7 +76,7 @@ export default function SettingsPage() {
         </Button>
       </div>
 
-      <div className="grid grid-cols-2 gap-4 max-[860px]:grid-cols-1">
+      <div className="grid grid-cols-2 gap-6 max-[860px]:grid-cols-1">
         <GlassCard className="col-span-2 p-6 max-[860px]:col-span-1">
           <CardHeader Icon={Gauge} title="Confidence threshold" subtitle="Tickets below this AI confidence are escalated to a human instead of auto-resolved." />
           <div className="mt-4">

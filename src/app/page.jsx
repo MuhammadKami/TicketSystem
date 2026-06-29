@@ -109,14 +109,13 @@ export default function LandingPage() {
       </header>
 
       <section
-        className="relative overflow-hidden bg-cover bg-center"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=85')" }}
+        className="relative overflow-hidden"
+        style={{
+          background:
+            'radial-gradient(ellipse 80% 50% at 50% -10%, rgba(37,99,235,0.35), transparent), linear-gradient(135deg, #0a0f1e 0%, #0f2044 40%, #0a1628 100%)',
+        }}
       >
-        <div
-          className="absolute inset-0 z-0"
-          style={{ background: 'linear-gradient(135deg, rgba(23,37,84,0.94) 0%, rgba(30,64,175,0.88) 45%, rgba(37,99,235,0.80) 100%)' }}
-        />
-        <div className="relative z-10 mx-auto max-w-6xl px-6 pb-16 pt-20 max-md:px-4 max-md:pt-12">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 py-24 max-md:px-4 max-md:py-16">
           <div className="grid grid-cols-[1.05fr_0.95fr] items-center gap-14 max-[940px]:grid-cols-1 max-[940px]:gap-10">
             <div className="flex animate-fade-up flex-col items-start">
               <h1 className="mb-5 text-[clamp(36px,6vw,58px)] font-bold leading-[1.05] tracking-tight text-white">
@@ -161,25 +160,24 @@ export default function LandingPage() {
 
       <section
         id="features"
-        className="relative bg-cover bg-center"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80')" }}
+        className="relative bg-[#f8faff] dark:bg-[#0d1117]"
+        style={{ borderTop: '1px solid rgba(37,99,235,0.15)' }}
       >
-        <div className="absolute inset-0 z-0" style={{ background: 'rgba(255,255,255,0.90)' }} />
-        <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 max-md:px-4">
+        <div className="relative z-10 mx-auto max-w-6xl px-6 py-24 max-md:px-4">
           <div className="mb-10 text-center">
-            <span className="text-xs font-medium uppercase tracking-wide text-blue-600">Why TriageAI</span>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-gray-900">
+            <span className="text-xs font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">Why TriageAI</span>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">
               Everything you need to deflect support load
             </h2>
           </div>
-          <div className="grid grid-cols-3 gap-4 max-[860px]:grid-cols-1">
+          <div className="grid grid-cols-3 gap-6 max-[860px]:grid-cols-1">
             {FEATURES.map(({ Icon, title, text }) => (
-              <div key={title} className="flex flex-col gap-3 rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md">
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600">
+              <div key={title} className="flex flex-col gap-3 rounded-xl border border-gray-100 bg-white p-6 shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:shadow-md dark:border-gray-800 dark:bg-gray-900">
+                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-blue-50 text-blue-600 dark:bg-blue-500/10 dark:text-blue-400">
                   <Icon size={20} strokeWidth={1.5} />
                 </span>
-                <h3 className="text-lg font-medium text-gray-900">{title}</h3>
-                <p className="text-sm leading-relaxed text-gray-600">{text}</p>
+                <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">{title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">{text}</p>
               </div>
             ))}
           </div>
@@ -188,28 +186,31 @@ export default function LandingPage() {
 
       <section
         id="how"
-        className="relative bg-cover bg-center"
-        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1920&q=80')" }}
+        className="relative"
+        style={{ background: 'linear-gradient(180deg, #eff6ff 0%, #f0f9ff 100%)' }}
       >
-        <div className="absolute inset-0 z-0" style={{ background: 'rgba(17,24,39,0.85)' }} />
-        <div className="relative z-10 mx-auto max-w-6xl px-6 py-16 max-md:px-4">
+        <div
+          className="pointer-events-none absolute inset-0 hidden dark:block"
+          style={{ background: 'linear-gradient(180deg, #0f172a 0%, #0a0f1e 100%)' }}
+        />
+        <div className="relative z-10 mx-auto max-w-6xl px-6 py-24 max-md:px-4">
           <div className="mb-10 text-center">
-            <span className="text-xs font-medium uppercase tracking-wide text-blue-400">The flow</span>
-            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-white">
+            <span className="text-xs font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">The flow</span>
+            <h2 className="mt-2 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">
               From inbox chaos to clean pipeline
             </h2>
           </div>
-          <div className="grid grid-cols-3 gap-4 max-[860px]:grid-cols-1">
+          <div className="grid grid-cols-3 gap-6 max-[860px]:grid-cols-1">
             {STEPS.map((s, i) => (
-              <div key={s.n} className="relative rounded-xl border border-white/10 bg-white/5 p-6 shadow-sm backdrop-blur-sm">
-                <span className="text-3xl font-bold text-blue-400/50">{s.n}</span>
-                <h3 className="mb-2 mt-3 text-lg font-medium text-white">{s.title}</h3>
-                <p className="text-sm leading-relaxed text-gray-300">{s.text}</p>
+              <div key={s.n} className="relative rounded-xl border border-gray-100 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/5 dark:backdrop-blur-sm">
+                <span className="text-3xl font-bold text-blue-500/40 dark:text-blue-400/50">{s.n}</span>
+                <h3 className="mb-2 mt-3 text-lg font-medium text-gray-900 dark:text-white">{s.title}</h3>
+                <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-300">{s.text}</p>
                 {i < STEPS.length - 1 && (
                   <ArrowRight
                     size={20}
                     strokeWidth={1.5}
-                    className="absolute -right-3 top-1/2 z-10 -translate-y-1/2 text-white/30 max-[860px]:hidden"
+                    className="absolute -right-3 top-1/2 z-10 -translate-y-1/2 text-gray-300 dark:text-white/30 max-[860px]:hidden"
                   />
                 )}
               </div>
@@ -218,10 +219,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-6xl px-6 py-16 max-md:px-4">
+      <section className="mx-auto max-w-6xl px-6 py-24 max-md:px-4">
         <div
-          className="relative overflow-hidden rounded-2xl px-8 py-16 text-center shadow-sm"
-          style={{ background: 'linear-gradient(135deg, #1e3a8a 0%, #2563eb 55%, #3b82f6 100%)' }}
+          className="animate-gradient-shift relative overflow-hidden rounded-2xl px-8 py-16 text-center shadow-sm"
+          style={{ background: 'linear-gradient(135deg, #1d4ed8 0%, #0891b2 50%, #1d4ed8 100%)' }}
         >
           <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-2xl" />
           <div className="pointer-events-none absolute -bottom-20 -left-10 h-64 w-64 rounded-full bg-sky-300/10 blur-2xl" />

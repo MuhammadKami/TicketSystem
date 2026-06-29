@@ -11,6 +11,8 @@ import {
   Gauge,
   Inbox,
   PartyPopper,
+  TrendingUp,
+  TrendingDown,
 } from 'lucide-react';
 import GlassCard from '@/components/ui/GlassCard';
 import Button from '@/components/ui/Button';
@@ -47,7 +49,7 @@ export default function OverviewPage() {
 
   return (
     <>
-      <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <span className="text-xs font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">
             Support Command Center
@@ -62,14 +64,58 @@ export default function OverviewPage() {
         </Button>
       </div>
 
-      <div className="mb-5 grid grid-cols-4 gap-4 max-[960px]:grid-cols-2">
-        <StatCard label="Total tickets" value={stats.total} Icon={Ticket} tone="blue" hint="all time" />
-        <StatCard label="Auto-resolution rate" value={`${stats.autoRate}%`} Icon={CheckCircle2} tone="green" hint={`${stats.auto + stats.resolved} resolved without a human`} />
-        <StatCard label="Escalated to humans" value={stats.escalated} Icon={Zap} tone="red" hint="need an agent" />
-        <StatCard label="Avg AI confidence" value={`${stats.avgConf}%`} Icon={Gauge} tone="amber" hint="across all tickets" />
+      <div className="mb-8 grid grid-cols-4 gap-6 max-[960px]:grid-cols-2">
+        <StatCard
+          label="Total tickets"
+          value={stats.total}
+          Icon={Ticket}
+          tone="blue"
+          hint="all time"
+          delta="+12% this week"
+          deltaUp
+          sparkId="spark-total"
+          sparkColor="#3b82f6"
+          spark={[12, 18, 15, 22, 20, 28, 32]}
+        />
+        <StatCard
+          label="Auto-resolution rate"
+          value={`${stats.autoRate}%`}
+          Icon={CheckCircle2}
+          tone="green"
+          hint={`${stats.auto + stats.resolved} resolved without a human`}
+          delta="+8% this week"
+          deltaUp
+          sparkId="spark-auto"
+          sparkColor="#22c55e"
+          spark={[60, 64, 62, 70, 68, 74, 78]}
+        />
+        <StatCard
+          label="Escalated to humans"
+          value={stats.escalated}
+          Icon={Zap}
+          tone="red"
+          hint="need an agent"
+          delta="-5% this week"
+          deltaUp={false}
+          sparkId="spark-escalated"
+          sparkColor="#f87171"
+          spark={[9, 7, 8, 6, 7, 5, 4]}
+        />
+        <StatCard
+          label="Avg AI confidence"
+          value={`${stats.avgConf}%`}
+          Icon={Gauge}
+          tone="amber"
+          hint="across all tickets"
+          delta="+3% this week"
+          deltaUp
+          sparkId="spark-conf"
+          sparkColor="#22c55e"
+          spark={[82, 80, 84, 83, 86, 88, 90]}
+        />
       </div>
 
-      <div className="grid grid-cols-[1.3fr_1fr] gap-4 max-[960px]:grid-cols-1">
+      <div className="grid grid-cols-[1.3fr_1fr] gap-6 max-[960px]:grid-cols-1">
         <GlassCard className="p-6">
           <div className="mb-4 flex items-start justify-between gap-3">
             <div className="flex items-center gap-2.5">
@@ -172,18 +218,69 @@ const TONE = {
   amber: 'bg-amber-50 text-amber-600 dark:bg-amber-500/10 dark:text-amber-400',
 };
 
-function StatCard({ label, value, hint, Icon, tone }) {
+function StatCard({ label, value, hint, Icon, tone, delta, deltaUp = true, spark, sparkColor = '#3b82f6', sparkId }) {
+  const TrendIcon = deltaUp ? TrendingUp : TrendingDown;
   return (
-    <GlassCard hover className="flex flex-col gap-3 p-4">
+    <GlassCard hover className="flex flex-col gap-3 p-6">
       <div className="flex items-center justify-between">
         <span className="text-xs font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400">{label}</span>
         <span className={`flex h-8 w-8 items-center justify-center rounded-lg ${TONE[tone]}`}>
           <Icon size={16} strokeWidth={1.5} />
         </span>
       </div>
-      <span className="text-3xl font-semibold tabular-nums tracking-tight text-gray-900 dark:text-gray-100">{value}</span>
+      <div className="flex flex-wrap items-baseline gap-2">
+        <span className="text-3xl font-semibold tabular-nums tracking-tight text-gray-900 dark:text-gray-100">{value}</span>
+        {delta && (
+          <span
+            className={`inline-flex items-center gap-1 rounded-full px-1.5 py-0.5 text-xs font-medium ${
+              deltaUp
+                ? 'bg-green-50 text-green-600 dark:bg-green-500/10 dark:text-green-400'
+                : 'bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-400'
+            }`}
+          >
+            <TrendIcon size={14} strokeWidth={1.5} />
+            {delta}
+          </span>
+        )}
+      </div>
       <span className="text-xs text-gray-400 dark:text-gray-500">{hint}</span>
+      {spark && <Sparkline data={spark} color={sparkColor} id={sparkId} />}
     </GlassCard>
+  );
+}
+
+function Sparkline({ data, color, id }) {
+  const w = 100;
+  const h = 32;
+  const pad = 3;
+  const max = Math.max(...data);
+  const min = Math.min(...data);
+  const range = max - min || 1;
+  const step = w / (data.length - 1);
+  const points = data.map((v, i) => {
+    const x = i * step;
+    const y = pad + (h - pad * 2) * (1 - (v - min) / range);
+    return [Number(x.toFixed(1)), Number(y.toFixed(1))];
+  });
+  const line = points.map(([x, y]) => `${x},${y}`).join(' ');
+  const area =
+    `M${points[0][0]},${points[0][1]} ` +
+    points
+      .slice(1)
+      .map(([x, y]) => `L${x},${y}`)
+      .join(' ') +
+    ` L${w},${h} L0,${h} Z`;
+  return (
+    <svg viewBox="0 0 100 32" preserveAspectRatio="none" className="mt-1" style={{ width: '100%', height: 32 }}>
+      <defs>
+        <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stopColor={color} stopOpacity="0.15" />
+          <stop offset="100%" stopColor={color} stopOpacity="0" />
+        </linearGradient>
+      </defs>
+      <path d={area} fill={`url(#${id})`} />
+      <polyline points={line} fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   );
 }
 

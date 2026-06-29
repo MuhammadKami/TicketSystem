@@ -99,6 +99,33 @@
   }
 }
 
+/* Dashboard shell — adds depth behind the cards */
+.dashboard-shell {
+  background: linear-gradient(135deg, #f0f4ff 0%, #fafafa 50%, #f0f9ff 100%);
+  border-top: 2px solid;
+  border-image: linear-gradient(90deg, #2563eb, #06b6d4) 1;
+}
+.dark .dashboard-shell {
+  background: linear-gradient(135deg, #0a0f1e 0%, #0f172a 60%, #0a1628 100%);
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradientShift 6s ease infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

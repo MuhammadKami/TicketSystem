@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { Plus, Search, Columns3, LayoutGrid, List, Inbox, SlidersHorizontal } from 'lucide-react';
+import { Plus, Search, Columns3, LayoutGrid, List, Inbox, SlidersHorizontal, ChevronDown } from 'lucide-react';
 import Button from '@/components/ui/Button';
 import TicketCard from '@/components/tickets/TicketCard';
 import TicketRow from '@/components/tickets/TicketRow';
@@ -48,7 +48,7 @@ export default function TicketsPage() {
 
   return (
     <>
-      <div className="mb-7 flex flex-wrap items-end justify-between gap-4">
+      <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <span className="text-xs font-medium uppercase tracking-wide text-blue-600 dark:text-blue-400">Ticket pipeline</span>
           <h1 className="mt-1 text-2xl font-semibold tracking-tight text-gray-900 dark:text-gray-100">Tickets</h1>
@@ -74,7 +74,7 @@ export default function TicketsPage() {
         <div className="relative">
           <SlidersHorizontal size={16} strokeWidth={1.5} className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
           <select
-            className="input input-icon cursor-pointer pr-8"
+            className="input input-icon cursor-pointer appearance-none pr-8"
             value={priority}
             onChange={(e) => setPriority(e.target.value)}
           >
@@ -84,6 +84,11 @@ export default function TicketsPage() {
             <option value="medium">Medium</option>
             <option value="low">Low</option>
           </select>
+          <ChevronDown
+            size={14}
+            strokeWidth={1.5}
+            className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400"
+          />
         </div>
         <div className="flex gap-1 rounded-lg border border-gray-200 bg-white p-1 dark:border-gray-800 dark:bg-gray-900">
           {VIEWS.map(({ key, label, Icon }) => (
@@ -106,7 +111,7 @@ export default function TicketsPage() {
       {loading ? (
         <EmptyState Icon={Inbox} title="Loading tickets…" text="Fetching the latest from your queue." />
       ) : view === 'board' ? (
-        <div className="grid grid-cols-4 items-start gap-4 max-[1100px]:grid-cols-2 max-[620px]:grid-cols-1">
+        <div className="grid grid-cols-4 items-start gap-6 max-[1100px]:grid-cols-2 max-[620px]:grid-cols-1">
           {COLUMNS.map((col) => {
             const items = filtered.filter(col.match);
             return (
@@ -137,7 +142,7 @@ export default function TicketsPage() {
         filtered.length === 0 ? (
           <EmptyState Icon={Inbox} title="No tickets found" text="Try adjusting your search or filters." />
         ) : (
-          <div className="grid gap-4 [grid-template-columns:repeat(auto-fill,minmax(320px,1fr))]">
+          <div className="grid gap-6 [grid-template-columns:repeat(auto-fill,minmax(320px,1fr))]">
             {filtered.map((t) => (
               <TicketCard key={t.id} ticket={t} onClick={setSelected} />
             ))}

@@ -1,6 +1,6 @@
 'use client';
 
-import { AlertCircle, CheckCircle2 } from 'lucide-react';
+import { AlertCircle, CheckCircle2, ChevronDown } from 'lucide-react';
 
 export function Field({ label, hint, error, success, children }) {
   return (
@@ -49,9 +49,16 @@ export function Textarea({ className = '', ...props }) {
 
 export function Select({ children, className = '', ...props }) {
   return (
-    <select className={`input cursor-pointer ${className}`} {...props}>
-      {children}
-    </select>
+    <div className="relative">
+      <select className={`input cursor-pointer appearance-none pr-8 ${className}`} {...props}>
+        {children}
+      </select>
+      <ChevronDown
+        size={14}
+        strokeWidth={1.5}
+        className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400"
+      />
+    </div>
   );
 }
 
