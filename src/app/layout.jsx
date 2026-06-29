@@ -9,10 +9,57 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: 'TriageAI — Smart Support Ticket Triage',
+  metadataBase: new URL('https://triageai.vercel.app'),
+  title: {
+    default: 'TriageAI — Smart Support Ticket Triage',
+    template: '%s · TriageAI',
+  },
   description:
-    'AI Support Ticket Triage System with auto-resolution, smart escalation, sentiment analysis and a clean, modern dashboard.',
-  keywords: ['support', 'ai', 'triage', 'tickets', 'gemini', 'supabase'],
+    'AI support ticket triage that auto-resolves the easy tickets, smart-escalates the rest to humans, and scores every ticket for sentiment, priority and confidence — in a clean, modern dashboard.',
+  applicationName: 'TriageAI',
+  keywords: [
+    'AI support',
+    'support ticket triage',
+    'auto-resolution',
+    'customer support automation',
+    'helpdesk AI',
+    'smart escalation',
+    'sentiment analysis',
+    'Gemini',
+    'Supabase',
+    'Next.js',
+  ],
+  authors: [{ name: 'TriageAI' }],
+  creator: 'TriageAI',
+  category: 'technology',
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'TriageAI',
+    url: '/',
+    locale: 'en_US',
+    title: 'TriageAI — Smart Support Ticket Triage',
+    description:
+      'Auto-resolve, auto-reply and smart-escalate support tickets with AI. Sentiment, priority and confidence scoring in one clean dashboard.',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TriageAI — Smart Support Ticket Triage',
+    description:
+      'AI that triages, auto-resolves and escalates your support tickets — wrapped in a clean, modern dashboard.',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export const viewport = {

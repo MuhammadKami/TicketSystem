@@ -3,7 +3,7 @@ import { ToastProvider } from '@/components/ui/Toast';
 import Sidebar from '@/components/layout/Sidebar';
 
 export const metadata = {
-  title: 'Dashboard — TriageAI',
+  title: 'Dashboard',
 };
 
 export default function DashboardLayout({ children }) {
